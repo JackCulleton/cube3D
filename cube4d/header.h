@@ -9,10 +9,12 @@
 # include "minilibx-linux/mlx.h"
 
 #define PI 3.1415926535
-#define TILE_SIZE 64
-#define RAY_WIDTH 4
-#define FOV 1.0471975512
-#define WIN_WIDTH 800    
+# define TILE_SIZE 64
+# define RAY_WIDTH 4
+# define FOV 1.0471975512
+# define WINDOW_WIDTH 1024
+# define WINDOW_HEIGHT 512
+
 
 
 typedef struct s_player_cord
@@ -32,6 +34,7 @@ typedef struct s_ray
 	double ray_y;
 	int map_x;
 	int map_y;
+	double distance;
 }	t_ray;
 
 typedef struct s_keys
@@ -65,6 +68,7 @@ typedef struct s_app
 	t_player	*player_cord;
 	t_keys		keys;
 	t_map		map;
+	t_ray		ray;
 	long		last_time;
 	char		**map_visual;
 }	t_app;
@@ -77,5 +81,6 @@ void	draw_map(t_app *app, t_img *img);
 void	put_pixel(t_img *img, int x, int y, int color);
 void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle);
 void	cast_all_rays(t_app *app);
-
+void	draw_walls(t_app *app, t_ray *ray, int screen_x);
+int hit_wall(t_app *app, double x, double y);
 #endif

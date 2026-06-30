@@ -1,9 +1,5 @@
 #include "header.h"
 
-#define TILE_SIZE 64
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 512
-
 void	put_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;

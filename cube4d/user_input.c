@@ -41,6 +41,8 @@ static void	draw_player(t_app *app, t_img *img)
 		put_pixel(img, (int)line_x, (int)line_y, 0x0000FF00);
 		i++;
 	}
+
+
 }
 
 static void	clear_image(t_img *img)
@@ -67,6 +69,7 @@ static void	render_scene(t_app *app)
 	draw_map(app, &app->img);
 	draw_player(app, &app->img);
 	cast_all_rays(app);
+	
 	mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
 }
 
@@ -122,6 +125,8 @@ static int	game_loop(t_app *app)
 	double	move_speed;
 	double	rot_speed;
 	double	move_step;
+	double	next_x;
+	double	next_y;
 	t_player *p;
 
 	p = app->player_cord;
@@ -136,14 +141,25 @@ static int	game_loop(t_app *app)
 
 	if (app->keys.w)
 	{
+		next_x = p->player_x + cos(p->player_ang) * move_step;
+		next_y = p->player_y + sin(p->player_ang) * move_step;
+		if (!hit_wall(app, next_x, next_y))
+		{
+		//check wall collsion
 		p->player_x += cos(p->player_ang) * move_step;
 		p->player_y += sin(p->player_ang) * move_step;
+		}
 	}
 
 	if (app->keys.s)
 	{
+		next_x = p->player_x - cos(p->player_ang) * move_step;
+		next_y = p->player_y - sin(p->player_ang) * move_step;
+		if (!hit_wall(app, next_x, next_y))
+		{
 		p->player_x -= cos(p->player_ang) * move_step;
 		p->player_y -= sin(p->player_ang) * move_step;
+		}
 	}
 
 	if (app->keys.a)
