@@ -31,8 +31,6 @@ void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle)
 	ray->map_x = (int)(ray->ray_x / TILE_SIZE);
 	ray->map_y = (int)(ray->ray_y / TILE_SIZE);
 
-	// calculate_direction(ray, ray->ray_dx, ray-> ray_dy);
-
 	while (1)
 	{
 		old_map_x = ray->map_x;
