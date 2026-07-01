@@ -85,7 +85,7 @@ static int	key_press(int keycode, t_app	*app)
 {
 	
 
-	// app = (t_app *)param;
+
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(app->mlx, app->win);

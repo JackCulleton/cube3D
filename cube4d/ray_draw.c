@@ -1,4 +1,62 @@
 #include "header.h"
+
+
+static void	calculate_direction(t_ray *ray, int old_map_x, int old_map_y)
+{
+	if (ray->map_x > old_map_x)
+		ray->wall_direction = WEST;
+	else if (ray->map_x < old_map_x)
+		ray->wall_direction = EAST;
+	else if (ray->map_y > old_map_y)
+		ray->wall_direction = NORTH;
+	else if (ray->map_y < old_map_y)
+		ray->wall_direction = SOUTH;
+}
+
+
+void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle)
+{
+
+	double dx;
+	double dy;
+	int		old_map_x;
+	int		old_map_y;
+
+	ray->ray_x = player->player_x;
+	ray->ray_y = player->player_y;
+
+	ray->ray_dx = cos(ray_angle);
+	ray->ray_dy = sin(ray_angle);
+
+	ray->map_x = (int)(ray->ray_x / TILE_SIZE);
+	ray->map_y = (int)(ray->ray_y / TILE_SIZE);
+
+	// calculate_direction(ray, ray->ray_dx, ray-> ray_dy);
+
+	while (1)
+	{
+		old_map_x = ray->map_x;
+		old_map_y = ray->map_y;
+		ray->ray_x += ray->ray_dx;
+		ray->ray_y += ray->ray_dy;
+
+		ray->map_x = (int)(ray->ray_x / TILE_SIZE);
+		ray->map_y = (int)(ray->ray_y / TILE_SIZE);
+
+		put_pixel(&app->img, (int)ray->ray_x, (int)ray->ray_y, 0x00FF0000);
+
+		if (app->map_visual[(int)ray->map_y][(int)ray->map_x] == '1')
+		{
+			calculate_direction(ray, old_map_x, old_map_y);
+			break;
+		}
+	}
+
+	dx = ray->ray_x - player->player_x;
+	dy = ray->ray_y - player->player_y;
+	ray->distance = sqrt((dx * dx) + (dy * dy));
+}
+
 void	cast_all_rays(t_app *app)
 {
 	t_ray	ray;
@@ -27,33 +85,3 @@ void	cast_all_rays(t_app *app)
 	}
 }
 
-void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle)
-{
-
-	double dx;
-	double dy;
-
-	ray->ray_x = player->player_x;
-	ray->ray_y = player->player_y;
-
-	ray->ray_dx = cos(ray_angle);
-	ray->ray_dy = sin(ray_angle);
-
-	while (1)
-	{
-		ray->ray_x += ray->ray_dx;
-		ray->ray_y += ray->ray_dy;
-
-		ray->map_x = (int)(ray->ray_x / TILE_SIZE);
-		ray->map_y = (int)(ray->ray_y / TILE_SIZE);
-
-		put_pixel(&app->img, (int)ray->ray_x, (int)ray->ray_y, 0x00FF0000);
-
-		if (app->map_visual[(int)ray->map_y][(int)ray->map_x] == '1')
-			break;
-	}
-
-	dx = ray->ray_x - player->player_x;
-	dy = ray->ray_y - player->player_y;
-	ray->distance = sqrt((dx * dx) + (dy * dy));
-}

@@ -6,6 +6,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdio.h>
 # include "minilibx-linux/mlx.h"
 
 #define PI 3.1415926535
@@ -15,7 +16,13 @@
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 512
 
-
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_direction;
 
 typedef struct s_player_cord
 {
@@ -35,6 +42,7 @@ typedef struct s_ray
 	int map_x;
 	int map_y;
 	double distance;
+	t_direction wall_direction;
 }	t_ray;
 
 typedef struct s_keys

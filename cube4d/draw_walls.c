@@ -17,7 +17,23 @@ void	draw_walls(t_app *app, t_ray *ray, int screen_x)
 	y = line_start;
 	while (y < line_end)
 	{
+		if(ray->wall_direction == NORTH)
+		{
 		put_pixel(&app->img, screen_x, y, 0x00FF0000);
+		}
+		if(ray->wall_direction == SOUTH)
+		{
+		put_pixel(&app->img, screen_x, y, 0x00FFFF00);
+		}
+		if(ray->wall_direction == EAST)
+		{
+		put_pixel(&app->img, screen_x, y, 0x00FF00FF);
+		}
+		if(ray->wall_direction == WEST)
+		{
+		put_pixel(&app->img, screen_x, y, 0x00FFFFFF);
+		}
+		
 		y++;
 	}
 }
