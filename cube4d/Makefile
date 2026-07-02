@@ -6,7 +6,7 @@ CFLAGS := -Wall -Wextra -Werror
 MLX_DIR := minilibx-linux
 MLX_FLAGS := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
-SRC := main.c user_input.c init_map.c draw_map.c ray_draw.c draw_walls.c wall_check.c
+SRC := main.c user_input.c init_map.c draw_map.c ray_draw.c draw_walls.c wall_check.c load_image.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)

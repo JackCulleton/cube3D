@@ -66,6 +66,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int 	height;
+	int 	width;
 }	t_img;
 
 typedef struct s_app
@@ -73,6 +75,7 @@ typedef struct s_app
 	void		*mlx;
 	void		*win;
 	t_img		img;
+	t_img		tile;
 	t_player	*player_cord;
 	t_keys		keys;
 	t_map		map;
@@ -91,4 +94,6 @@ void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle);
 void	cast_all_rays(t_app *app);
 void	draw_walls(t_app *app, t_ray *ray, int screen_x);
 int hit_wall(t_app *app, double x, double y);
+void load_image(t_app *app, t_img *tex, char *path);
+
 #endif

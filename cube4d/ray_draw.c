@@ -7,9 +7,9 @@ static void	calculate_direction(t_ray *ray, int old_map_x, int old_map_y)
 		ray->wall_direction = WEST;
 	else if (ray->map_x < old_map_x)
 		ray->wall_direction = EAST;
-	else if (ray->map_y > old_map_y)
-		ray->wall_direction = NORTH;
 	else if (ray->map_y < old_map_y)
+		ray->wall_direction = NORTH;
+	else if (ray->map_y > old_map_y)
 		ray->wall_direction = SOUTH;
 }
 
