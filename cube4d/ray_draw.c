@@ -21,6 +21,7 @@ void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle)
 	double dy;
 	int		old_map_x;
 	int		old_map_y;
+	
 
 	ray->ray_x = player->player_x;
 	ray->ray_y = player->player_y;
