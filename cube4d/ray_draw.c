@@ -79,6 +79,8 @@ void	cast_all_rays(t_app *app)
 		ray.distance = ray.distance * cos(ray_angle - app->player_cord->player_ang);
 
 		draw_walls(app, &ray, x + map_width);
+		draw_roof(app, &ray, x + map_width);
+		draw_floor(app, &ray, x + map_width);
 
 		x++;
 	}

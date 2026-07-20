@@ -135,3 +135,82 @@ y = draw_start;
 		y++;
 	}
 }
+
+
+
+
+
+void	draw_roof(t_app *app, t_ray *ray, int screen_x)
+{
+	double	line_h;
+	int		line_start;
+	int		line_end;
+	int		y;
+
+
+	int draw_start;
+	int draw_end;
+
+	if (ray->distance <= 0)
+		return ;
+
+	line_h = (TILE_SIZE * 320) / ray->distance;
+
+	line_start = (WINDOW_HEIGHT / 2) - (line_h / 2);
+	line_end = (WINDOW_HEIGHT / 2) + (line_h / 2);
+
+	draw_start = line_start;
+	draw_end = line_end;
+
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end > WINDOW_HEIGHT)
+		draw_end = WINDOW_HEIGHT;
+
+y = 0;
+
+	while (y < line_start)
+	{
+		put_pixel(&app->img,screen_x, y ,0xFF0000 );
+		
+		y++;
+	}
+}
+
+
+void	draw_floor(t_app *app, t_ray *ray, int screen_x)
+{
+	double	line_h;
+	int		line_start;
+	int		line_end;
+	int		y;
+
+
+	int draw_start;
+	int draw_end;
+
+	if (ray->distance <= 0)
+		return ;
+
+	line_h = (TILE_SIZE * 320) / ray->distance;
+
+	line_start = (WINDOW_HEIGHT / 2) - (line_h / 2);
+	line_end = (WINDOW_HEIGHT / 2) + (line_h / 2);
+
+	draw_start = line_start;
+	draw_end = line_end;
+
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end > WINDOW_HEIGHT)
+		draw_end = WINDOW_HEIGHT;
+
+y = line_end;
+
+	while (y < WINDOW_HEIGHT)
+	{
+		put_pixel(&app->img,screen_x, y ,0xFF0000 );
+		
+		y++;
+	}
+}

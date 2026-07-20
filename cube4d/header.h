@@ -97,4 +97,6 @@ void	draw_walls(t_app *app, t_ray *ray, int screen_x);
 int hit_wall(t_app *app, double x, double y);
 void load_image(t_app *app, t_img *tex, char *path);
 
+void	draw_roof(t_app *app, t_ray *ray, int screen_x);
+void	draw_floor(t_app *app, t_ray *ray, int screen_x);
 #endif
