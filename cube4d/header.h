@@ -7,7 +7,8 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdio.h>
-# include "minilibx-linux/mlx.h"
+// # include "minilibx-linux/mlx.h"
+#include "mlx.h"
 
 #define PI 3.1415926535
 # define TILE_SIZE 64
