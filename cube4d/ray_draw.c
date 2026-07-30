@@ -43,7 +43,7 @@ while (1)
 	ray->map_x = (int)(ray->ray_x / TILE_SIZE);
 	ray->map_y = (int)(ray->ray_y / TILE_SIZE);
 
-	/* The ray crossed both boundaries at once */
+	// The ray crossed both boundaries at once 
 	if (ray->map_x != old_map_x && ray->map_y != old_map_y)
 	{
 		if (app->map_visual[old_map_y][ray->map_x] == '1'
@@ -53,7 +53,7 @@ while (1)
 		}
 	}
 
-	/* Normal wall collision */
+	// Normal wall collision 
 	if (app->map_visual[ray->map_y][ray->map_x] == '1')
 	{
 		calculate_direction(ray, old_map_x, old_map_y);
