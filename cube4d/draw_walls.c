@@ -209,7 +209,7 @@ y = line_end;
 
 	while (y < WINDOW_HEIGHT)
 	{
-		put_pixel(&app->img,screen_x, y ,0xFF0000 );
+		put_pixel(&app->img,screen_x, y ,0xFFF000 );
 		
 		y++;
 	}

@@ -32,24 +32,37 @@ void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle)
 	ray->map_x = (int)(ray->ray_x / TILE_SIZE);
 	ray->map_y = (int)(ray->ray_y / TILE_SIZE);
 
-	while (1)
+while (1)
+{
+	old_map_x = ray->map_x;
+	old_map_y = ray->map_y;
+
+	ray->ray_x += ray->ray_dx;
+	ray->ray_y += ray->ray_dy;
+
+	ray->map_x = (int)(ray->ray_x / TILE_SIZE);
+	ray->map_y = (int)(ray->ray_y / TILE_SIZE);
+
+	/* The ray crossed both boundaries at once */
+	if (ray->map_x != old_map_x && ray->map_y != old_map_y)
 	{
-		old_map_x = ray->map_x;
-		old_map_y = ray->map_y;
-		ray->ray_x += ray->ray_dx;
-		ray->ray_y += ray->ray_dy;
-
-		ray->map_x = (int)(ray->ray_x / TILE_SIZE);
-		ray->map_y = (int)(ray->ray_y / TILE_SIZE);
-
-		put_pixel(&app->img, (int)ray->ray_x, (int)ray->ray_y, 0x00FF0000);
-
-		if (app->map_visual[(int)ray->map_y][(int)ray->map_x] == '1')
+		if (app->map_visual[old_map_y][ray->map_x] == '1'
+			&& app->map_visual[ray->map_y][old_map_x] == '1')
 		{
-			calculate_direction(ray, old_map_x, old_map_y);
 			break;
 		}
 	}
+
+	/* Normal wall collision */
+	if (app->map_visual[ray->map_y][ray->map_x] == '1')
+	{
+		calculate_direction(ray, old_map_x, old_map_y);
+		break;
+	}
+
+	put_pixel(&app->img, (int)ray->ray_x,
+		(int)ray->ray_y, 0x00FF0000);
+}
 
 	dx = ray->ray_x - player->player_x;
 	dy = ray->ray_y - player->player_y;
