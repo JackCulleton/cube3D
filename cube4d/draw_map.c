@@ -39,9 +39,11 @@ void	draw_map(t_app *app, t_img *img)
 		x = 0;
 		while (app->map_visual[y][x])
 		{
-			if (app->map_visual[y][x] == '1')
+			if (app->map_visual[y][x] == '1' )
 				draw_square(img, x * TILE_SIZE, y * TILE_SIZE, 0x00333333);
-			else if (app->map_visual[y][x] == '0')
+			else if (app->map_visual[y][x] == '0' || app->map_visual[y][x] == 'N' 
+					|| app->map_visual[y][x] == 'E' || app->map_visual[y][x] == 'S' 
+					|| app->map_visual[y][x] == 'W')
 				draw_square(img, x * TILE_SIZE, y * TILE_SIZE, 0x00FFFFFF);
 			x++;
 		}
