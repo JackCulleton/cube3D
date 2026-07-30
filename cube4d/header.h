@@ -94,7 +94,7 @@ void	put_pixel(t_img *img, int x, int y, int color);
 void	ray_caster(t_ray *ray, t_app *app, t_player *player, double ray_angle);
 void	cast_all_rays(t_app *app);
 void	draw_walls(t_app *app, t_ray *ray, int screen_x);
-int hit_wall(t_app *app, double x, double y);
+int	hit_wall(t_app *app, t_player *p, double x, double y);
 void load_image(t_app *app, t_img *tex, char *path);
 
 void	draw_roof(t_app *app, t_ray *ray, int screen_x);

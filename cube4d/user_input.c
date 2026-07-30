@@ -143,7 +143,8 @@ static int	game_loop(t_app *app)
 	{
 		next_x = p->player_x + cos(p->player_ang) * move_step;
 		next_y = p->player_y + sin(p->player_ang) * move_step;
-		if (!hit_wall(app, next_x, next_y))
+		
+		if (!hit_wall(app, p, next_x, next_y))
 		{
 		//check wall collsion
 		p->player_x += cos(p->player_ang) * move_step;
@@ -155,7 +156,7 @@ static int	game_loop(t_app *app)
 	{
 		next_x = p->player_x - cos(p->player_ang) * move_step;
 		next_y = p->player_y - sin(p->player_ang) * move_step;
-		if (!hit_wall(app, next_x, next_y))
+	if (!hit_wall(app, p, next_x, next_y))
 		{
 		p->player_x -= cos(p->player_ang) * move_step;
 		p->player_y -= sin(p->player_ang) * move_step;
