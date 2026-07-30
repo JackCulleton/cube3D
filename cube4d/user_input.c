@@ -139,6 +139,7 @@ static int	game_loop(t_app *app)
 
 	move_step = move_speed * delta_time;
 
+	
 	if (app->keys.w)
 	{
 		next_x = p->player_x + cos(p->player_ang) * move_step;

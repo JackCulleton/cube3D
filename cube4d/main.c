@@ -1,9 +1,51 @@
 #include "header.h"
 
-static void	init_player(t_player *player)
+static void	init_player(t_player *player, t_app	*app)
 {
-	player->player_x = 100.0;
-	player->player_y = 100.0;
+
+	int	y;
+int	x;
+
+y = 0;
+while (app->map_visual[y] != NULL)
+{
+	x = 0;
+	while (app->map_visual[y][x] != '\0')
+	{
+		if (app->map_visual[y][x] == 'N')
+		{
+			player->player_x = x * TILE_SIZE + TILE_SIZE / 2;
+			player->player_y = y * TILE_SIZE + TILE_SIZE / 2;
+			player->player_ang = 3 * PI / 2;
+			return ;
+		}
+			if (app->map_visual[y][x] == 'S')
+		{
+			player->player_x = x * TILE_SIZE + TILE_SIZE / 2;
+			player->player_y = y * TILE_SIZE + TILE_SIZE / 2;
+			player->player_ang = PI / 2;
+			return ;
+		}
+			if (app->map_visual[y][x] == 'E')
+		{
+			player->player_x = x * TILE_SIZE + TILE_SIZE / 2;
+			player->player_y = y * TILE_SIZE + TILE_SIZE / 2;
+			player->player_ang = 0;
+			return ;
+		}
+			if (app->map_visual[y][x] == 'W')
+		{
+			player->player_x = x * TILE_SIZE + TILE_SIZE / 2;
+			player->player_y = y * TILE_SIZE + TILE_SIZE / 2;
+			player->player_ang = PI;
+			return ;
+		}
+		x++;
+	}
+	y++;
+}
+	// player->player_x = 100.0;
+	// player->player_y = 100.0;
 }
 
 static void	init_keys(t_keys *keys)
@@ -37,11 +79,12 @@ int	main(int argc, char **argv)
 		return (1);
 	app.img.addr = mlx_get_data_addr(app.img.img,
 			&app.img.bits_per_pixel, &app.img.line_length, &app.img.endian);
-	init_player(&player);
+	// init_player(&player, &app);
 	init_keys(&app.keys);
 	app.last_time = get_time_ms();
 	app.player_cord = &player;
 	init_map(&app, argv[1]);
+	init_player(&player, &app);
 	key_input(&app);
 	mlx_loop(app.mlx);
 	return (0);
