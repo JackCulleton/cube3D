@@ -73,6 +73,27 @@ static void	render_scene(t_app *app)
 	mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
 }
 
+static int	clean_up(t_app *app)
+{
+	free_map(app->map_visual);
+	
+	if (!app)
+		exit(0);
+	if (app->img.img)
+		mlx_destroy_image(app->mlx, app->img.img);
+	if (app->tile.img)
+		mlx_destroy_image(app->mlx, app->tile.img);
+	if (app->win)
+		mlx_destroy_window(app->mlx, app->win);
+	if (app->mlx)
+	{
+		mlx_destroy_display(app->mlx);
+		free(app->mlx);
+	}
+	exit(0);
+	return (0);
+}
+
 long	get_time_ms(void)
 {
 	struct timeval	tv;
@@ -88,7 +109,8 @@ static int	key_press(int keycode, t_app	*app)
 
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(app->mlx, app->win);
+		// mlx_destroy_window(app->mlx, app->win);
+		clean_up(app);
 		exit(0);
 	}
 	if (keycode == 119)
@@ -189,5 +211,6 @@ void	key_input(t_app *app)
 {
 	mlx_hook(app->win, 2, 1L << 0, key_press, app);
 	mlx_hook(app->win, 3, 1L << 1, key_release, app);
+	mlx_hook(app->win, 17, 0, clean_up, app);
 	mlx_loop_hook(app->mlx, game_loop, app);
 }

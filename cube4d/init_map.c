@@ -7,6 +7,22 @@ static void	init_size_data(int *max_width, int *current_width, int *height)
 	*height = 0;
 }
 
+
+void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 static t_map	make_size(int max_width, int height)
 {
 	t_map	size;

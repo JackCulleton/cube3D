@@ -56,6 +56,8 @@ static void	init_keys(t_keys *keys)
 	keys->d = 0;
 }
 
+
+
 int	main(int argc, char **argv)
 {
 	t_app	app;
@@ -87,5 +89,7 @@ int	main(int argc, char **argv)
 	init_player(&player, &app);
 	key_input(&app);
 	mlx_loop(app.mlx);
+
+
 	return (0);
 }
