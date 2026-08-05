@@ -71,7 +71,10 @@ int	main(int argc, char **argv)
 	app.mlx = mlx_init();
 	if (!app.mlx)
 		return (1);
-	load_image(&app, &app.tile, "New-Project (1).xpm");
+	load_image(&app, &app.north_texture, "North.xpm");
+	load_image(&app, &app.east_texture, "East.xpm");
+	load_image(&app, &app.south_texture, "South.xpm");
+	load_image(&app, &app.west_texture, "West.xpm");
 
 	app.win = mlx_new_window(app.mlx, 1024, 512, "cube4d");
 	if (!app.win)

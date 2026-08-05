@@ -79,10 +79,12 @@ static int	clean_up(t_app *app)
 	
 	if (!app)
 		exit(0);
-	if (app->img.img)
-		mlx_destroy_image(app->mlx, app->img.img);
-	if (app->tile.img)
-		mlx_destroy_image(app->mlx, app->tile.img);
+	// if (app->img.img)
+	// 	mlx_destroy_image(app->mlx, app->img.img);
+	if (app->north_texture.img)
+		mlx_destroy_image(app->mlx, app->north_texture.img);
+	if (app->east_texture.img)
+		mlx_destroy_image(app->mlx, app->east_texture.img);
 	if (app->win)
 		mlx_destroy_window(app->mlx, app->win);
 	if (app->mlx)

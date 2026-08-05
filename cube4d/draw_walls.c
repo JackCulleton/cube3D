@@ -102,33 +102,33 @@ y = draw_start;
 	while (y < draw_end)
 	{
 		// texture_y = ((y - line_start) * TILE_SIZE) / (line_end - line_start);
-		texture_y = ((y - line_start) * app->tile.height) / line_h;
+		texture_y = ((y - line_start) * app->north_texture.height) / line_h;
 
 		if(ray->wall_direction == NORTH)
 		{
-			colour = get_pixel(&app->tile, tile_x_pos, texture_y);
+			colour = get_pixel(&app->north_texture, tile_x_pos, texture_y);
 			put_pixel(&app->img, screen_x, y, colour);
 		}
 
 		if(ray->wall_direction == SOUTH)
 		{
-			colour = get_pixel(&app->tile,
-				app->tile.width - 1 - tile_x_pos,
+			colour = get_pixel(&app->south_texture,
+				app->south_texture.width - 1 - tile_x_pos,
 				texture_y);
 			put_pixel(&app->img, screen_x, y, colour);
 		}
 
 		if(ray->wall_direction == EAST)
 		{
-			colour = get_pixel(&app->tile,
-				app->tile.width - 1 - tile_y_pos,
+			colour = get_pixel(&app->east_texture,
+				app->east_texture.width - 1 - tile_y_pos,
 				texture_y);
 			put_pixel(&app->img, screen_x, y, colour);
 		}
 
 		if(ray->wall_direction == WEST)
 		{
-			colour = get_pixel(&app->tile, tile_y_pos, texture_y);
+			colour = get_pixel(&app->west_texture, tile_y_pos, texture_y);
 			put_pixel(&app->img, screen_x, y, colour);
 		}
 		

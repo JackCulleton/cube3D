@@ -7,8 +7,8 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdio.h>
-// # include "minilibx-linux/mlx.h"
-#include "mlx.h"
+# include "minilibx-linux/mlx.h"
+// #include "mlx.h"
 
 #define PI 3.1415926535
 # define TILE_SIZE 64
@@ -76,7 +76,10 @@ typedef struct s_app
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	t_img		tile;
+	t_img		north_texture;
+	t_img		east_texture;
+	t_img		south_texture;
+	t_img		west_texture;
 	t_player	*player_cord;
 	t_keys		keys;
 	t_map		map;
