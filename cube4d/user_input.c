@@ -123,6 +123,10 @@ static int	key_press(int keycode, t_app	*app)
 		app->keys.a = 1;
 	else if (keycode == 100)
 		app->keys.d = 1;
+	else if (keycode == 65361)
+    	app->keys.look_left = 1;
+	else if (keycode == 65363)
+    	app->keys.look_right = 1;
 	return (0);
 }
 
@@ -139,6 +143,10 @@ static int	key_release(int keycode, t_app	*app)
 		app->keys.a = 0;
 	else if (keycode == 100)
 		app->keys.d = 0;
+	else if (keycode == 65361)
+    	app->keys.look_left = 0;
+	else if (keycode == 65363)
+    	app->keys.look_right = 0;
 	return (0);
 }
 
@@ -172,34 +180,74 @@ static int	game_loop(t_app *app)
 		if (!hit_wall(app, p, next_x, next_y))
 		{
 		//check wall collsion
-		p->player_x += cos(p->player_ang) * move_step;
-		p->player_y += sin(p->player_ang) * move_step;
+		// p->player_x += cos(p->player_ang) * move_step;
+		// p->player_y += sin(p->player_ang) * move_step;
+			p->player_x = next_x;
+			p->player_y = next_y;
 		}
 	}
 
 	if (app->keys.s)
 	{
-		next_x = p->player_x - cos(p->player_ang) * move_step;
-		next_y = p->player_y - sin(p->player_ang) * move_step;
-	if (!hit_wall(app, p, next_x, next_y))
+	next_x = p->player_x - cos(p->player_ang) * move_step;
+	next_y = p->player_y - sin(p->player_ang) * move_step;
+
+		if (!hit_wall(app, p, next_x, next_y))
 		{
-		p->player_x -= cos(p->player_ang) * move_step;
-		p->player_y -= sin(p->player_ang) * move_step;
+			p->player_x = next_x;
+			p->player_y = next_y;
 		}
 	}
 
 	if (app->keys.a)
 	{
-		p->player_ang -= rot_speed * delta_time;
-		if (p->player_ang < 0)
-			p->player_ang += 2 * PI;
+		// p->player_ang -= rot_speed * delta_time;
+		// if (p->player_ang < 0)
+		// 	p->player_ang += 2 * PI;
+
+		next_x = p->player_x + cos(p->player_ang - PI / 2) * move_step;
+		next_y = p->player_y + sin(p->player_ang - PI / 2) * move_step;
+		
+		if (!hit_wall(app, p, next_x, next_y))
+			{
+			p->player_x = next_x;
+			p->player_y = next_y;
+			}
 	}
 
 	if (app->keys.d)
 	{
+		// p->player_ang += rot_speed * delta_time;
+		// if (p->player_ang > 2 * PI)
+		// 	p->player_ang -= 2 * PI;
+
+		next_x = p->player_x + cos(p->player_ang + PI / 2) * move_step;
+		next_y = p->player_y + sin(p->player_ang + PI / 2) * move_step;
+		
+		if (!hit_wall(app, p, next_x, next_y))
+			{
+			p->player_x = next_x;
+			p->player_y = next_y;
+			}
+	}
+
+	if (app->keys.look_right)
+	{
 		p->player_ang += rot_speed * delta_time;
 		if (p->player_ang > 2 * PI)
 			p->player_ang -= 2 * PI;
+
+	}
+
+	if (app->keys.look_left)
+	{
+
+			p->player_ang -= rot_speed * delta_time;
+			
+		if (p->player_ang < 0)
+			p->player_ang += 2 * PI;
+
+
 	}
 
 	p->player_dx = cos(p->player_ang);

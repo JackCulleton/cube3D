@@ -52,6 +52,8 @@ typedef struct s_keys
 	int	a;
 	int	s;
 	int	d;
+	int	look_left;
+	int	look_right;
 }	t_keys;
 
 typedef struct s_map
